@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-var firebase = require("firebase");
+import firebase from 'firebase/app';
 var uuid = require("uuid");
+
 var firebaseConfig = {
   apiKey: "AIzaSyD1ObnxHuNDYIsziZ-8C9OHwXhwMfay7UA",
   authDomain: "react-firebase-a57e9.firebaseapp.com",
@@ -13,15 +14,53 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 export default class Survey extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      uid: uuid.v1(),
+      studentName: "",
+      answers: {
+        answer1: "",
+        answer2: "",
+        answer3: ""
+      },
+      isSubmitted: false
+    };
+  }
+  mySubmit(event) {
+    var studentName = this.refs.name.value;
+    this.setState({
+      studentName: studentName
+    },function(){ console.log(this.state);});
+   
 
+}
 
-
-    
   render() {
+    var studentName;
+    var questions;
+
+    if (this.state.studentName === "" && this.state.isSubmitted === false) {
+      studentName = (
+        <div>
+          <h1>Hey Student,Please Enter Your Name</h1>
+          <form onSubmit={this.mySubmit}>
+            <input
+              className="namy"
+              type="text"
+              placeholder="Enter Your Name"
+              ref="name"
+            ></input>
+          </form>
+        </div>
+      );
+    }
     return (
       <div>
-        <p>I am react component</p>
+        {studentName}
+        _______________________________________________________
+        {questions}
       </div>
     );
   }
