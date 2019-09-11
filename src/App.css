@@ -63,9 +63,6 @@ font-size: 60px;
 
 }
 
-
-
-
 .feedback-button {
 display: inline-block;
 
@@ -103,4 +100,11 @@ box-shadow: 0 5px 0 0 rgba(178,49,49,1) ;
 .namy{
 font-size: 30px;
 padding: 20px;
+}
+.header{
+  background-color:black;
+  color:cornsilk;
+  height: 50px;
+  width: 100%;
+padding-top: 2px;
 }

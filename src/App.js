@@ -2,12 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Survey from './survey';
+import Header from './header';
 
 
 function App() {
   return (
     <div className="App">
-      <h1>This is react</h1>
+<Header/>
       <Survey/>
     </div>
   );

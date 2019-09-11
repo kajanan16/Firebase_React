@@ -19,11 +19,11 @@ export default class Survey extends Component {
 
     this.state = {
       uid: uuid.v1(),
-      studentName: "",
+      studentName: '',
       answers: {
-        answer1: "",
-        answer2: "",
-        answer3: ""
+        answer1: '',
+        answer2: '',
+        answer3: ''
       },
       isSubmitted: false
     };
@@ -45,17 +45,16 @@ export default class Survey extends Component {
   answerSubmit(event) {
     var ans = this.state.answers;
     if (event.target.name === 'answer1') {
-      ans.answer1 = this.event.value;
+      ans.answer1 =event.target.value;
     } else if (event.target.name === "answer2") {
-      ans.answer2 = this.event.value;
+      ans.answer2 = event.target.value;
     } else if (event.target.name === "answer3") {
-      ans.answer3 = this.event.value;
+      ans.answer3 = event.target.value;
     }
     this.setState({
       answers: ans
     },function(){console.log(this.state)});
 
-    //
   }
   formSubmit() {}
 
@@ -63,7 +62,7 @@ export default class Survey extends Component {
     var studentName;
     var questions;
 
-    if (this.state.studentName === "" && this.state.isSubmitted === false) {
+    if (this.state.studentName === '' && this.state.isSubmitted === false) {
       studentName = (
         <div>
           <h1>Hey Student,Please Enter Your Name</h1>
@@ -77,9 +76,9 @@ export default class Survey extends Component {
           </form>
         </div>
       );
-      questions = "";
+      questions = '';
     } else if (
-      this.state.studentName != "" &&
+      this.state.studentName != '' &&
       this.state.isSubmitted == false
     ) {
       studentName = <h1>Hey there,{this.state.studentName}</h1>;
