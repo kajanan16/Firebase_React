@@ -3,16 +3,16 @@ import firebase from "firebase/app";
 var uuid = require("uuid");
 
 var firebaseConfig = {
-  apiKey: "AIzaSyD1ObnxHuNDYIsziZ-8C9OHwXhwMfay7UA",
-  authDomain: "react-firebase-a57e9.firebaseapp.com",
-  databaseURL: "https://react-firebase-a57e9.firebaseio.com",
-  projectId: "react-firebase-a57e9",
-  storageBucket: "react-firebase-a57e9.appspot.com",
-  messagingSenderId: "35165317480",
-  appId: "1:35165317480:web:c6441e01235074e5768edd"
+  apiKey: "AIzaSyBHc28f6LsWrtVVEe5O8nX_VhWcqAWQHgA",
+  authDomain: "ksurvey-2adaa.firebaseapp.com",
+  databaseURL: "https://ksurvey-2adaa.firebaseio.com",
+  projectId: "ksurvey-2adaa",
+  storageBucket: "",
+  messagingSenderId: "143015974928",
+  appId: "1:143015974928:web:b61d3b83e46aa263d3d295"
 };
-
 firebase.initializeApp(firebaseConfig);
+
 export default class Survey extends Component {
   constructor(props) {
     super(props);
@@ -36,9 +36,6 @@ export default class Survey extends Component {
     this.setState(
       {
         studentName: studentName
-      },
-      function() {
-        console.log(this.state);
       }
     );
   }
@@ -61,16 +58,19 @@ export default class Survey extends Component {
     );
   }
   formSubmit() {
-    firebase
-      .database()
-      .ref("kSurvey/" + this.state.uid)
-      .set({
+      console.log("formSubmited")
+      firebase.database().ref('kSurvey/'+this.state.uid).set({
         studentName: this.state.studentName,
         answers: this.state.answers
       });
-    this.setState({
-      isSubmitted: true
-    });
+    this.setState(
+      {
+        isSubmitted: true
+      },
+      function() {
+        console.log(this.state);
+      }
+    );
   }
 
   render() {
@@ -176,16 +176,12 @@ export default class Survey extends Component {
               />
               Others
             </div>
-            <input className="feedback-button" type="submit" />
+               <input className="feedback-button" type="submit" value="submit" />
           </form>
         </div>
       );
-    } else if (this.state.isSubmitted == true) {
-      studentName = (
-        <div>
-          <h1>Thanks,{this.state.studentName}</h1>
-        </div>
-      );
+    } else if (this.state.isSubmitted === true) {
+    studentName = <h1>Thanks, {this.state.studentName}</h1>
     }
 
     return (
