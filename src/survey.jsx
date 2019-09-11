@@ -28,6 +28,8 @@ export default class Survey extends Component {
       isSubmitted: false
     };
     this.mySubmit = this.mySubmit.bind(this);
+    this.answerSubmit = this.answerSubmit.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
   }
   mySubmit(event) {
     var studentName = this.refs.name.value;
@@ -40,9 +42,22 @@ export default class Survey extends Component {
       }
     );
   }
-  answerSubmit() {
+  answerSubmit(event) {
+    var ans = this.state.answers;
+    if (event.target.name === 'answer1') {
+      ans.answer1 = this.event.value;
+    } else if (event.target.name === "answer2") {
+      ans.answer2 = this.event.value;
+    } else if (event.target.name === "answer3") {
+      ans.answer3 = this.event.value;
+    }
+    this.setState({
+      answers: ans
+    },function(){console.log(this.state)});
+
     //
   }
+  formSubmit() {}
 
   render() {
     var studentName;
@@ -71,7 +86,7 @@ export default class Survey extends Component {
       questions = (
         <div>
           <h2>Here are some questions :</h2>
-          <form>
+          <form onSubmit={this.formSubmit}>
             <div className="card">
               <label>What kind of course you like most :</label>
               <p></p>
@@ -147,7 +162,14 @@ export default class Survey extends Component {
               />
               Others
             </div>
+            <input className="feedback-button" type="submit" />
           </form>
+        </div>
+      );
+    } else if (this.state.isSubmitted == true) {
+      studentName = (
+        <div>
+          <h1>Thanks,{this.state.studentName}</h1>
         </div>
       );
     }
