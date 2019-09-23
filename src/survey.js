@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import firebase from "firebase/app";
-var uuid = require("uuid");
+var firebase = require('firebase');
+var uuid = require('uuid');
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBHc28f6LsWrtVVEe5O8nX_VhWcqAWQHgA",
-  authDomain: "ksurvey-2adaa.firebaseapp.com",
-  databaseURL: "https://ksurvey-2adaa.firebaseio.com",
-  projectId: "ksurvey-2adaa",
+  apiKey: "AIzaSyDnFAhXH50x__HSAaE_sM25dLJ0LTtWMzQ",
+  authDomain: "my-firebase-6ccaf.firebaseapp.com",
+  databaseURL: "https://my-firebase-6ccaf.firebaseio.com",
+  projectId: "my-firebase-6ccaf",
   storageBucket: "",
-  messagingSenderId: "143015974928",
-  appId: "1:143015974928:web:b61d3b83e46aa263d3d295"
+  messagingSenderId: "805936918557",
+  appId: "1:805936918557:web:46d94928f4f4d5797516f4"
 };
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 export default class Survey extends Component {
@@ -59,18 +60,14 @@ export default class Survey extends Component {
   }
   formSubmit() {
       console.log("formSubmited")
-      firebase.database().ref('kSurvey/'+this.state.uid).set({
+      firebase.database().ref('my-firebase/'+this.state.uid).set({
         studentName: this.state.studentName,
         answers: this.state.answers
       });
     this.setState(
       {
         isSubmitted: true
-      },
-      function() {
-        console.log(this.state);
-      }
-    );
+      });
   }
 
   render() {
@@ -78,8 +75,7 @@ export default class Survey extends Component {
     var questions;
 
     if (this.state.studentName === "" && this.state.isSubmitted === false) {
-      studentName = (
-        <div>
+      studentName = <div>
           <h1>Hey Student,Please Enter Your Name</h1>
           <form onSubmit={this.mySubmit}>
             <input
@@ -90,15 +86,12 @@ export default class Survey extends Component {
             ></input>
           </form>
         </div>
-      );
       questions = "";
     } else if (
-      this.state.studentName != "" &&
-      this.state.isSubmitted == false
-    ) {
+      this.state.studentName !== '' &&
+      this.state.isSubmitted === false) {
       studentName = <h1>Hey there,{this.state.studentName}</h1>;
-      questions = (
-        <div>
+      questions =  <div>
           <h2>Here are some questions :</h2>
           <form onSubmit={this.formSubmit}>
             <div className="card">
@@ -179,8 +172,7 @@ export default class Survey extends Component {
                <input className="feedback-button" type="submit" value="submit" />
           </form>
         </div>
-      );
-    } else if (this.state.isSubmitted === true) {
+      } else if (this.state.isSubmitted === true) {
     studentName = <h1>Thanks, {this.state.studentName}</h1>
     }
 
